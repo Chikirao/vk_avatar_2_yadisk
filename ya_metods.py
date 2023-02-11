@@ -31,6 +31,13 @@ class YandexDisk:
         response = requests.put(url, headers=headers, params=params)
         return response.json()
     
+    def upload_photo(self, disk_file_path, filename):
+        href = self._get_upload_link(disk_file_path=disk_file_path).get("href", "")
+        response = requests.put(href, data=open(filename, 'rb'))
+        response.raise_for_status()
+        if response.status_code == 201:
+            print(" Фото загружено!")
+    
 
 # ya = YandexDisk(disk_token)
-# ya.create_folder('VK photos')
+# ya.upload_photo('')

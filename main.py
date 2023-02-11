@@ -1,9 +1,16 @@
 import requests
 import configparser as cf # Для парса конфига
-import time, vk, os, json
+import time, os, json, shutil
 from pprint import pprint
 from progress.bar import IncrementalBar
 from ya_metods import * # Там код для работы с диском
+
+try:
+    os.makedirs('saved_pictures/piks_out')
+except FileExistsError:
+    print('')
+shutil.rmtree('saved_pictures/piks_out') # Очистим папку
+os.makedirs('saved_pictures/piks_out')
 
 bar = IncrementalBar('Скачивание с ВК:', max = 6) 
 
@@ -55,8 +62,25 @@ bar.finish()
 
 # Полетели на диск
 
-bar = IncrementalBar('Загрузка на диск:', max = 6)
+bar = IncrementalBar('Загрузка на диск:', max = 6 + len(new_json)*2)
 ya = YandexDisk(disk_token)
 ya.create_folder('VK photos') # создаём папку для выгрузки
 
 bar.next()
+
+for image in new_json: # Скачаем фото
+    img_data = requests.get(new_json.get(image)).content
+    with open(f'saved_pictures/piks_out/{image}.jpg', 'wb') as handler:
+        handler.write(img_data)
+    bar.next()
+
+bar.next()
+
+for image in new_json:
+    try:
+        ya.upload_photo(f'VK photos/{image}', f'saved_pictures/piks_out/{image}.jpg')
+        bar.next()
+    except requests.exceptions.HTTPError:
+        print('Фото не найдено! Возможно оно не существует. Проверьте ссылку', new_json.get(image))
+        bar.next()
+        continue
