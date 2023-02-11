@@ -1,6 +1,32 @@
 {
-  "response": {
-    "count": 0,
-    "items": []
+  "error": {
+    "error_code": 5,
+    "error_msg": "User authorization failed: invalid access_token (4).",
+    "request_params": [
+      {
+        "key": "owner_id",
+        "value": "1"
+      },
+      {
+        "key": "album_id",
+        "value": "profile"
+      },
+      {
+        "key": "v",
+        "value": "5.131"
+      },
+      {
+        "key": "extended",
+        "value": "1"
+      },
+      {
+        "key": "method",
+        "value": "photos.get"
+      },
+      {
+        "key": "oauth",
+        "value": "1"
+      }
+    ]
   }
 }
