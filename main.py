@@ -11,8 +11,8 @@ config = cf.ConfigParser()
 config.read("config2.ini")
 disk_token = config.get('TOKEN','disk_token') # Токен диска
 
-vk_token = config.get('TOKEN', 'vk_access_token') # Токен и id вк (не обязательно)
-vk_id = str(config.get('TOKEN', 'vk_user_id'))
+# vk_token = config.get('TOKEN', 'vk_access_token') # Токен и id вк (не обязательно)
+# vk_id = str(config.get('TOKEN', 'vk_app_id')) # СТАРАЯ ВЕРСИЯ
 
 serv_key = 'c3d398bec3d398bec3d398be24c0c11502cc3d3c3d398bea0306811fe8afcb75ebc4ae9' # Сервисный ключ доступа
 bar.next()
