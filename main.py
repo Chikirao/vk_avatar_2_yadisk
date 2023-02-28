@@ -113,7 +113,7 @@ bar.finish()
 
 # Полетели на диск 💽
 
-bar = IncrementalBar('Загрузка на диск:', max = 1 + len(new_json)*2)
+bar = IncrementalBar('Загрузка на диск:', max = 3 + len(new_json)*2)
 ya = YandexDisk(disk_token)
 ya.create_folder(fold_name) # создаём папку для выгрузки 📂
 
